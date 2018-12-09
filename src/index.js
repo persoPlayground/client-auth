@@ -10,15 +10,22 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import App from './components/App';
 import Home from './components/Home';
 import Signup from './components/auth/Signup';
+import Message from './components/Message';
+import Signout from './components/auth/Signout';
+import Signint from './components/auth/Signin';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const authenticated =localStorage.getItem('token');
+const store = createStore(rootReducer,{ auth: {authenticated}}, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
     <Provider store={store}>
     <Router>
         <App>
             <Route exact path="/" component={Home}/>
-            <Route exact path="/signup" component={Signup}/>
+            <Route  path="/signup" component={Signup}/>
+            <Route  path="/message" component={Message}/>
+            <Route  path="/signout" component={Signout}/>
+            <Route  path="/signin" component={Signint}/>
        </App>
      </Router>
     </Provider>
